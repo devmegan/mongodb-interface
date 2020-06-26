@@ -25,6 +25,7 @@ def mongo_connect(url):
 def show_menu():
     """display menu options to user"""
     print("")
+    print("MAIN MENU")
     print("1: Add a Record")
     print("2: Find a Record")
     print("3: Edit a Record")
