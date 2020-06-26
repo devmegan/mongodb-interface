@@ -20,7 +20,7 @@ def mongo_connect(url):
         # if connection fails, let user know
         print ("Could not connect to Mongo %s") % e #interpolates error message into string. 
 
-def show_memu():
+def show_menu():
     """display menu options to user"""
     print("")
     print("1: Add a Record")
@@ -56,3 +56,6 @@ conn = mongo_connect(MONGO_URI) # call function to connect to mongodb
 
 coll = conn[DB_NAME][COLL_NAME] # set connection 
 print("\n"*3 + str(coll) + "\n"*3)
+
+
+main_loop() #call main loop to continue displaying options/processing user input
