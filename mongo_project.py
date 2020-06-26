@@ -51,3 +51,8 @@ def main_loop():
         else:
             print("Invalid Option")
             print("")
+
+conn = mongo_connect(MONGO_URI) # call function to connect to mongodb
+
+coll = conn[DB_NAME][COLL_NAME] # set connection 
+print("\n"*3 + str(coll) + "\n"*3)
