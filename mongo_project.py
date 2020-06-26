@@ -19,3 +19,35 @@ def mongo_connect(url):
     except pymongo.errors.ConnectionFailure as e:
         # if connection fails, let user know
         print ("Could not connect to Mongo %s") % e #interpolates error message into string. 
+
+def show_memu():
+    """display menu options to user"""
+    print("")
+    print("1: Add a Record")
+    print("2: Find a Record")
+    print("3: Edit a Record")
+    print("4: Delete a Record")
+    print("5: Exit")
+
+    option = input("Enter Option: ")
+    return option
+
+def main_loop(): 
+    """ call menu every time we come back to it """
+    while True: # will basically run forever...
+        option = show_menu() # store result of show_menu function in variable option
+        if option == "1":
+            print("You have selected option 1")
+        elif option == "2":
+            print("You have selected option 2")
+        elif option == "3":
+            print("You have selected option 3")
+        elif option == "4":
+            print("You have selected option 4")
+        elif option == "5":
+            print("Connection will now close")
+            conn.close()
+            break
+        else:
+            print("Invalid Option")
+            print("")
