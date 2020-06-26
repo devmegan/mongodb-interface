@@ -37,6 +37,30 @@ def show_menu():
 
 
 # CRUD FUNCTIONS
+def get_record():
+    "fetch and display record from db"
+    print("")
+    first = input("Enter first name > ")
+    last = input("Enter last name > ")
+    print("Searching for a record of: {} {}".format(first, last))
+
+    try:
+        # find record that matches name
+        doc = coll.find_one({"first": first.lower(), "last": last.lower()})
+        print("")
+        print("Record Found:")
+        print(doc)
+    except:
+        print("")
+        print("Error fetching record")
+
+    if not doc:  # if no record found, an empty doc var is returned
+        print("")
+        print("No records found matching {} {}.".format(first, last))
+
+    return doc
+
+
 def add_record():
     """ get input and create new record from it """
     print("")
@@ -73,6 +97,7 @@ def main_loop():
             add_record()
         elif option == "2":
             print("You have selected option 2")
+            get_record()
         elif option == "3":
             print("You have selected option 3")
         elif option == "4":
