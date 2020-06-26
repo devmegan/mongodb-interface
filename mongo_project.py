@@ -42,14 +42,12 @@ def get_record():
     print("")
     first = input("Enter first name > ")
     last = input("Enter last name > ")
+    print("")
     print("Searching for a record of: {} {}".format(first, last))
 
     try:
         # find record that matches name
         doc = coll.find_one({"first": first.lower(), "last": last.lower()})
-        print("")
-        print("Record Found:")
-        print(doc)
     except:
         print("")
         print("Error fetching record")
@@ -87,6 +85,15 @@ def add_record():
         print("")
         print("Error writing to Mongo")
 
+def find_record():
+    """ display record if one found """
+    doc = get_record()
+    if doc:
+        print("")
+        for key, value in doc.items(): 
+            if key != "_id":  # don't want to display id to user
+                print(key.capitalize() + ": " + value.capitalize())
+
 
 def main_loop():
     """ call menu every time we come back to it """
@@ -97,7 +104,7 @@ def main_loop():
             add_record()
         elif option == "2":
             print("You have selected option 2")
-            get_record()
+            find_record()
         elif option == "3":
             print("You have selected option 3")
         elif option == "4":
