@@ -36,12 +36,41 @@ def show_menu():
     return option
 
 
+# CRUD FUNCTIONS
+def add_record():
+    """ get input and create new record from it """
+    print("")
+    # get user input for record
+    first = input("Enter First Name > ")
+    last = input("Enter Last Name > ")
+    dob = input("Enter Date of Birth (DD/MM/YYYY) > ")
+    gender = input("Enter gender > ")
+    hair_colour = input("Enter hair colour > ")
+    occupation = input("Enter occupation > ")
+    nationality = input("Enter nationality > ")
+
+    # construct string to feed to new record statement
+    new_rec = {'first': first.lower(), 'last': last.lower(), 'dob': dob, 'gender': gender.lower(), 'hair_colour': hair_colour.lower(), 'occupation': occupation.lower(), 'nationality': nationality.lower()}
+
+    try:
+        # insert the new record into the db
+        coll.insert_one(new_rec)
+        print("")
+        print("Record successfully created")
+        print("New Record: " + str(new_rec))
+    except:
+        # generic error statement
+        print("")
+        print("Error writing to Mongo")
+
+
 def main_loop():
     """ call menu every time we come back to it """
     while True:  # will basically run forever...
         option = show_menu()  # store result of show_menu function in variable option
         if option == "1":
             print("You have selected option 1")
+            add_record()
         elif option == "2":
             print("You have selected option 2")
         elif option == "3":
@@ -49,7 +78,7 @@ def main_loop():
         elif option == "4":
             print("You have selected option 4")
         elif option == "5":
-            print("Connection will now close")
+            print("Closing Connection to Mongo")
             conn.close()
             break
         else:
