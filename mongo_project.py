@@ -95,6 +95,26 @@ def find_record():
                 print(key.capitalize() + ": " + value.capitalize())
 
 
+def delete_record():
+    doc = get_record()
+    if doc:
+        print("")
+        for key, value in doc.items():
+            if key != "_id":
+                print(key.capitalize() + ": " + value.capitalize())
+        print("")
+        confirmation = input("Is this the document you want to delete?\nY/N > ")
+        print("")
+
+        if confirmation.lower() == 'y':
+            try:
+                coll.delete_one(doc)
+                print("Document deleted!")
+            except:
+                print("Error deleting the document")
+
+
+
 def main_loop():
     """ call menu every time we come back to it """
     while True:  # will basically run forever...
@@ -109,6 +129,7 @@ def main_loop():
             print("You have selected option 3")
         elif option == "4":
             print("You have selected option 4")
+            delete_record()
         elif option == "5":
             print("Closing Connection to Mongo")
             conn.close()
