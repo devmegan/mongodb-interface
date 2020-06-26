@@ -15,7 +15,6 @@ def mongo_connect(url):
     try:
         # if connection successful, let user know
         conn = pymongo.MongoClient(url)
-        print("Mongo Connected!")
         return conn
     except pymongo.errors.ConnectionFailure as e:
         # if connection fails, let user know
