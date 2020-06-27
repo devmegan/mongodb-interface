@@ -94,6 +94,28 @@ def find_record():
             if key != "_id":  # don't want to display id to user
                 print(key.capitalize() + ": " + value.capitalize())
 
+def edit_record():
+    doc = get_record()
+    if doc:
+        update_doc = {}
+        print("")
+        for key, value in doc.items():
+            if key != "_id":
+                update_doc[key] = input(key.capitalize() + " [" + value + "] > ")
+                if update_doc[key] == "":
+                    update_doc[key] = value
+        try:
+            coll.update_one(doc, {'$set': update_doc})
+            print("")
+            print("Document updated")
+            print("Updated Record: " + str(update_doc))
+        except:
+            print("Error accessing the database")
+
+
+
+
+
 
 def delete_record():
     doc = get_record()
@@ -127,6 +149,7 @@ def main_loop():
             find_record()
         elif option == "3":
             print("You have selected option 3")
+            edit_record()
         elif option == "4":
             print("You have selected option 4")
             delete_record()
